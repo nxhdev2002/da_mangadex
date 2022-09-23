@@ -1,5 +1,5 @@
 package com.myapp;
-
+import com.microsoft.codepush.react.CodePush;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
@@ -32,6 +32,11 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected String getJSMainModuleName() {
           return "index";
+        }
+        
+        @Override
+        protected String getJSBundleFile() {
+            return CodePush.getJSBundleFile();
         }
       };
 
