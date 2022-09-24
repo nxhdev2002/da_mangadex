@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from '../../features';
 import { fetchEposides } from '../../features/comic';
 export const Eposide = () => {
     const current = useSelector((state: RootState) => state.current)
+    // const current = "96fe1639-b55c-4b0c-8bec-fd941260728e"
     const eposide = useSelector((state: RootState) => state.eposide)
     const dispatch = useDispatch<AppDispatch>()
     useEffect(() => {

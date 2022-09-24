@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableWithoutFeedback } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { ChapterState } from '../../type'
 import {StackNavigation} from '../../navigators/main'
+
 type ChapterComponentProps = {
     chapter: ChapterState
 }

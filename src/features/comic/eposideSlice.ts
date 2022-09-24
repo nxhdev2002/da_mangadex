@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { ChapterState } from '../../type';
+import { ChapterState, ComicState } from '../../type';
 
 type SliceState = {
     loading: boolean
@@ -15,9 +15,9 @@ const initialState: SliceState = {
     error: null
 }
 
-export const fetchEposides = createAsyncThunk('eposide/fetchEposides', (id: String) => {
+export const fetchEposides = createAsyncThunk('eposide/fetchEposides', (comic: ComicState) => {
     return axios
-        .get('https://nxhdev.pro/mangadex/manga/'+id+'/chapter')
+        .get('https://nxhdev.pro/mangadex/manga/'+comic.id+'/chapter')
         .then(response => response.data)
 })
 

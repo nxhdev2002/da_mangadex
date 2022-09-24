@@ -27,7 +27,7 @@ export const Header = (props: AppProp) => {
                     </Text>
                     <Text style={styles.itemDescription}>
                         {
-                            comic.desc['en'].slice(0, 80)
+                            Object.keys(comic.desc).length > 0 ? comic.desc[Object.keys(comic.desc)[0]].slice(0, 80) : 'DESCRIPTION NOT AVAIABLE'
                         }...
                     </Text>
                 

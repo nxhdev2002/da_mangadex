@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {useState} from 'react'
 import { Text, ImageBackground, StyleSheet, Dimensions, ActivityIndicator, TouchableOpacity } from 'react-native'
 
 type CoverComponentProps = {

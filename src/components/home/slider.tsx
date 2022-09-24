@@ -3,7 +3,7 @@ import { View, Dimensions, ImageBackground } from 'react-native'
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { CoverComponent } from '../manga';
 import { useSelector, useDispatch } from "react-redux";
-import {fetchComics} from '../../features/comic/';
+import {fetchComics, setCurrent} from '../../features/comic/';
 import { useNavigation } from '@react-navigation/native';
 import { AppDispatch, RootState } from '../../features';
 import { ComicState } from '../../type';
@@ -34,7 +34,7 @@ export const Slider: FC = () => {
                             source={item.thumb} 
                             name={item.name} 
                             goToInfo={() => {
-                                // dispatch(setCurrentManga(item))
+                                dispatch(setCurrent(item))
                                 navigation.navigate("InfoScreen", {comic: item}) 
                             }} 
                         />
