@@ -1,9 +1,10 @@
-import { comicReducer } from './comic'
+import { comicReducer, eposideReducer } from './comic'
 import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
     reducer: {
-        comic: comicReducer
+        comic: comicReducer,
+        eposide: eposideReducer
     }
 })
 export default store

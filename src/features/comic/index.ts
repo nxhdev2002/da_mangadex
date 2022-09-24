@@ -1,1 +1,2 @@
-export * from './comicSlide'
+export * from './comicSlice'
+export * from './eposideSlice'
