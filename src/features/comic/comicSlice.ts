@@ -21,6 +21,12 @@ export const fetchComics = createAsyncThunk('comic/fetchComics', () => {
         .then(response => response.data)
 })
 
+export const fetchPopular = createAsyncThunk('comic/fetchPopular', (offset: string) => {
+    return axios
+        .get('https://nxhdev.pro/mangadex/manga?publicationDemographic%5B%5D=shounen&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&offset=' + offset.toString)
+        .then(response => response.data)
+})
+
 const comicSlice = createSlice({
     name: 'comic',
     initialState,
