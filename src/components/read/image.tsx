@@ -6,10 +6,9 @@ type RemoteImageProps = {
     desiredWidth: number
 }
 
-export const RemoteImage= memo(({uri, desiredWidth}: RemoteImageProps) => {
+export const RemoteImage = memo(({uri, desiredWidth}: RemoteImageProps) => {
     const [desiredHeight, setDesiredHeight] = useState(200)
     const [loading, isLoading] = useState(true)
-    console.log(uri)
     Image.getSize(uri, (width, height) => {
         setDesiredHeight(desiredWidth / width * height)
     })

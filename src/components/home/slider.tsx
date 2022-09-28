@@ -3,7 +3,7 @@ import { View, Dimensions, ImageBackground } from 'react-native'
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { CoverComponent } from '../manga';
 import { useSelector, useDispatch } from "react-redux";
-import {fetchComics, setCurrent} from '../../features/comic/';
+import {fetchSlide, setCurrent} from '../../features/comic/';
 import { useNavigation } from '@react-navigation/native';
 import { AppDispatch, RootState } from '../../features';
 import { ComicState } from '../../type';
@@ -14,14 +14,14 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
 
 export const Slider: FC = () => {
     const navigation = useNavigation<StackNavigation>();
-    const comic: ComicState[] = useSelector((state: RootState) => state.comic.data)
+    const comic: ComicState[] = useSelector((state: RootState) => state.comic.slide.data)
     const [activeSlide, setActiveSlide] = useState(0)
     const dispatch = useDispatch<AppDispatch>()
     useEffect(() => {
-        dispatch(fetchComics())
+        dispatch(fetchSlide())
     }, [dispatch])
     return (    
-            <ImageBackground style={{flex: 1.8, justifyContent: 'center', backgroundColor: '#00cec9'}} source={{uri: 'https://media.discordapp.net/attachments/880688607881494538/1020672928515371130/IMG_20220917_192915.jpg'}} imageStyle={{opacity: 0.3}}>
+            <ImageBackground style={{flex: 1, justifyContent: 'center', backgroundColor: '#00cec9'}} source={{uri: 'https://media.discordapp.net/attachments/880688607881494538/1020672928515371130/IMG_20220917_192915.jpg'}} imageStyle={{opacity: 0.3}}>
                 <Carousel
                     data={comic}
                     style={{flex: 1}}

@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
         borderRadius: 25 ,
     },
     cover: {
-        height: 200,
+        resizeMode: 'stretch',
+        flexWrap: 'wrap',
         width: WIDTH * 0.9,
-        justifyContent: 'flex-end',
+        // justifyContent: 'flex-end',
     },
     insideText: {
         color: "white",
