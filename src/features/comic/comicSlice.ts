@@ -2,19 +2,22 @@ import axios from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { ComicState } from '../../type';
 
-type SliceState = {
-    slide: {
-        loading: boolean
-        data: ComicState[]
-        error: any
-    },
-    popular: {
-        loading: boolean
-        data: ComicState[]
-        error: any
-    }
+type FetchState = {
+    loading: boolean
+    data: ComicState[]
+    error: any
 }
-   
+
+type SliceState = {
+    slide: FetchState
+    popular: FetchState
+    search: FetchState
+}
+
+type SearchParams = {
+    title: string,
+    offset: number
+}
 
 const initialState: SliceState = {
     slide: {
@@ -24,6 +27,11 @@ const initialState: SliceState = {
     },
     popular: {
         loading: true,
+        data: [],
+        error: null
+    },
+    search: {
+        loading: false,
         data: [],
         error: null
     }
@@ -39,6 +47,13 @@ export const fetchPopular = createAsyncThunk('comic/fetchPopular', (offset: numb
     console.log("Fetching " + offset.toString())
     return axios
         .get('https://nxhdev.pro/mangadex/manga?publicationDemographic%5B%5D=shounen&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&offset=' + offset.toString())
+        .then(response => response.data)
+})
+
+export const fetchSearchResult = createAsyncThunk('comic/fetchSearchResult', (params: SearchParams) => {
+    console.log("Fetching " + params.offset.toString())
+    return axios
+        .get('https://nxhdev.pro/mangadex/manga?includes[]=cover_art&title=' + encodeURI(params.title) + '&offset=' + params.offset.toString())
         .then(response => response.data)
 })
 
@@ -72,6 +87,20 @@ const comicSlice = createSlice({
             state.popular.loading = false;
             state.popular.data = [];
             state.popular.error = action.error.message;
+        });
+
+        builder.addCase(fetchSearchResult.pending, state => {
+            state.search.loading = true;
+        });
+        builder.addCase(fetchSearchResult.fulfilled, (state, action) => {
+            state.search.loading = false;
+            state.search.data = action.payload;
+            state.search.error = '';
+        });
+        builder.addCase(fetchSearchResult.rejected, (state, action) => {
+            state.search.loading = false;
+            state.search.data = [];
+            state.search.error = action.error.message;
         });
     },
     reducers: {}
